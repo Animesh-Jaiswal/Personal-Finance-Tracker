@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 
 export default function Dashboard() {
@@ -86,8 +87,33 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-15">
-        <div className="flex items-center justify-center">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-15 p-4">
+        <div className="flex flex-col lg:flex-row items-center justify-center mb-8 lg:mb-0">
+          <div className="flex flex-col items-center justify-center w-full lg:w-auto">
+            <h2 className="text-xl font-bold mb-4">Spending by Category</h2>
+            <div className="w-full h-[270px] max-w-[400px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    dataKey="total"
+                    data={data.pieChart}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={80}
+                    label
+                  >
+                    {data.pieChart.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
           <div className="mt-4 flex flex-col items-center">
             {data.pieChart.map((entry, index) => (
               <div key={index} className="flex items-center mb-1">
@@ -99,37 +125,20 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <h2 className="text-xl font-bold mb-4">Spending by Category</h2>
-            <PieChart width={400} height={270}>
-              <Pie
-                dataKey="total"
-                data={data.pieChart}
-                cx="50%"
-                cy="50%"
-                outerRadius={100}
-                label
-              >
-                {data.pieChart.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="text-xl font-bold">Spending Over Time</h2>
-          <LineChart width={600} height={270} data={data.lineChartData}>
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip />
-            <Line type="monotone" dataKey="total" stroke="#82ca9d" />
-          </LineChart>
+        <div className="flex flex-col items-center justify-center w-full">
+          <h2 className="text-xl font-bold mb-4">Spending Over Time</h2>
+          <div className="w-full h-[270px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={data.lineChartData}>
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="total" stroke="#82ca9d" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
     </div>
