@@ -89,9 +89,10 @@ export default function Dashboard() {
 
       <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-8 p-4 w-full">
         {/* Pie Chart Section - takes ~40% on lg screens */}
-        <div className="flex flex-col lg:flex-row items-center justify-center mb-8 lg:mb-0 lg:w-[40%]">
-          <div className="flex flex-col items-center justify-center w-full">
-            <h2 className="text-xl font-bold mb-4">Spending by Category</h2>
+
+        <div className="flex flex-col items-center justify-center w-full">
+          <h2 className="text-xl font-bold mb-4">Spending by Category</h2>
+          <div className="flex flex-col lg:flex-row items-center justify-center mb-8 lg:mb-0 lg:w-[40%]">
             <div className="mt-4 flex flex-col items-center lg:ml-4">
               {data.pieChart.map((entry, index) => (
                 <div key={index} className="flex items-center mb-1">
