@@ -87,11 +87,12 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-15 p-4">
-        <div className="flex flex-col lg:flex-row items-center justify-center mb-8 lg:mb-0">
-          <div className="flex flex-col items-center justify-center w-full lg:w-auto">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-8 p-4 w-full">
+        {/* Pie Chart Section - takes ~40% on lg screens */}
+        <div className="flex flex-col lg:flex-row items-center justify-center mb-8 lg:mb-0 lg:w-[40%]">
+          <div className="flex flex-col items-center justify-center w-full">
             <h2 className="text-xl font-bold mb-4">Spending by Category</h2>
-            <div className="w-full h-[270px] max-w-[400px]">
+            <div className="w-full h-[270px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -99,7 +100,7 @@ export default function Dashboard() {
                     data={data.pieChart}
                     cx="50%"
                     cy="50%"
-                    outerRadius={80}
+                    outerRadius={100}
                     label
                   >
                     {data.pieChart.map((entry, index) => (
@@ -114,7 +115,7 @@ export default function Dashboard() {
               </ResponsiveContainer>
             </div>
           </div>
-          <div className="mt-4 flex flex-col items-center">
+          <div className="mt-4 flex flex-col items-center lg:ml-4">
             {data.pieChart.map((entry, index) => (
               <div key={index} className="flex items-center mb-1">
                 <div
@@ -127,7 +128,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full">
+        {/* Line Chart Section - takes ~60% on lg screens */}
+        <div className="flex flex-col items-center justify-center w-full lg:w-[60%]">
           <h2 className="text-xl font-bold mb-4">Spending Over Time</h2>
           <div className="w-full h-[270px]">
             <ResponsiveContainer width="100%" height="100%">
